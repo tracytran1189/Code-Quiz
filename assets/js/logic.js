@@ -53,18 +53,19 @@ var quizQuestions = [{
         correctAnswer: 'Prompt()'
     },
 ]
-var time = 100;
+var time = 50;
 var timerInterval;
 var gameIndex = -1;
 var numberOfQuestions = quizQuestions.length;
 var currentQuestionIndex = 0;
 
 function startQuiz() {
+    startBtn.remove();
     console.log('startQuiz');
-    timerEl.textContent = time;
+    timerEl.textContent = ("Time left : " + time);
     timerInterval = setInterval(function() {
         time--;
-        timerEl.textContent = time;
+        timerEl.textContent = ("Time left : " + time);
         if (time <= 0) {
             endQuiz();
         }
@@ -113,10 +114,12 @@ function checkAnswer(event) {
     var selectedAnswer = event.target.textContent;
     if (correctAnswer === selectedAnswer) {
         console.log('correct');
+
     } else {
+        time -= 10;
         console.log('false');
     }
-
+    gameIndex++;
     currentQuestionIndex++;
     clearQuestion();
     showQuestion();
@@ -126,9 +129,6 @@ function generateQuiz() {
     console.log('generateQuiz')
 
     showQuestion();
-    //show results after click submit
-    // submitButton.addEventListener('click', showResults);
+
 }
-
-
 startBtn.onclick = startQuiz;
