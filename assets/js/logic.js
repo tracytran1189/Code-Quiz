@@ -55,16 +55,15 @@ var quizQuestions = [{
         correctAnswer: 'Prompt()'
     },
 ]
-var time = 10;
+var time;
 var timerInterval;
-var gameIndex = -1;
 var numberOfQuestions = quizQuestions.length;
-var currentQuestionIndex = 0;
-var score = 0;
-var userName = ""
+var currentQuestionIndex;
+var score;
+var userName;
 
 function startQuiz() {
-    time = 10;
+    time = 50;
     score = 0;
     currentQuestionIndex = 0;
     userName = "";
@@ -88,7 +87,7 @@ function startQuiz() {
         }
     }, 1000);
 
-    gameIndex++;
+
     generateQuiz();
 }
 
@@ -145,7 +144,7 @@ function checkAnswer(event) {
         time -= 10;
         console.log('false');
         showAnswer.textContent = ("Wrong Answer");
-        gameIndex++;
+
     }
     // resultsContainer.textContent = ("Your Score = " + score + " /5 ");
 
