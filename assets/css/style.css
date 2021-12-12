@@ -1,3 +1,7 @@
+* {
+    box-sizing: border-box;
+}
+
 header {
     text-align: center;
 }
@@ -6,9 +10,16 @@ main {
     padding: 20px;
 }
 
+#answers {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 button {
-    display: block;
-    margin: auto;
+    background-color: rgb(39, 202, 194);
+    border-radius: 5px;
+    width: fit-content;
 }
 
 

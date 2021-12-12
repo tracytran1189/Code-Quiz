@@ -3,6 +3,7 @@ var timerEl = document.getElementById('timer');
 var quizContainer = document.getElementById('quiz-container');
 var showAnswer = document.getElementById('answer');
 var resultsContainer = document.getElementById('results');
+var summitBtn = document.getElementById('get-your-score');
 //add questions
 var quizQuestions = [{
         question: "1. What does HTML stand for?",
@@ -59,7 +60,7 @@ var gameIndex = -1;
 var numberOfQuestions = quizQuestions.length;
 var currentQuestionIndex = 0;
 var score = 0;
-
+var userName = ""
 
 function startQuiz() {
     startBtn.remove();
@@ -68,7 +69,7 @@ function startQuiz() {
     timerInterval = setInterval(function() {
         time--;
         timerEl.textContent = ("Time left : " + time);
-        if (time <= 0) {
+        if (time <= 0 || currentQuestionIndex == quizQuestions.length) {
             endQuiz();
         }
     }, 1000);
@@ -79,6 +80,8 @@ function startQuiz() {
 
 function endQuiz() {
     clearInterval(timerInterval);
+
+    getHighScore();
 }
 
 
@@ -103,17 +106,17 @@ function showQuestion() {
         answerButton.textContent = quizQuestions[currentQuestionIndex].answers[button];
         answerButton.setAttribute('data-answer', quizQuestions[currentQuestionIndex].correctAnswer);
         answerButton.onclick = checkAnswer;
-        // answers.push(answerButton);
+
         answersDiv.append(answerButton);
     }
     quizContainer.append(answersDiv);
-    // if (numberOfQuestions < quizQuestions.length) {
-    //     endQuiz();
+
 
 }
 
 //check answers
 function checkAnswer(event) {
+    event.preventDefault();
     console.log('checkAnswer', event);
     var correctAnswer = event.target.getAttribute("data-answer");
     var selectedAnswer = event.target.textContent;
@@ -122,6 +125,7 @@ function checkAnswer(event) {
         score++;
         showAnswer.textContent = ("You got it right!");
 
+
     } else {
         time -= 10;
         console.log('false');
@@ -129,17 +133,59 @@ function checkAnswer(event) {
         gameIndex++;
     }
     resultsContainer.textContent = ("Your Score = " + score + " /5 ");
-    localStorage.setItem("score", JSON.stringify(score));
+
+
     currentQuestionIndex++;
+
     clearQuestion();
 
     showQuestion();
+
+
 }
+
+
 
 function generateQuiz() {
     console.log('generateQuiz')
 
     showQuestion();
 }
+
+function getHighScore() {
+    console.log("high score");
+    resultsContainer.remove();
+    showAnswer.remove();
+    summitBtn.textContent = ("All Done ! Enter your name:");
+    var form = document.createElement('form');
+    form.id = "form";
+
+    var initial = document.createElement('input');
+    initial.id = "Name";
+    initial.placeholder = "Type your name here...";
+
+
+    form.onsubmit = function(e) {
+        e.preventDefault();
+        console.log('submit', initial.value);
+        userName = initial.value;
+
+        displayResult();
+    }
+
+    form.append(initial);
+
+    summitBtn.append(form);
+
+}
+
+function displayResult() {
+    // document.getElementById('form').remove();
+    // var resultEl = document.createElement('div');
+    // resultEl.id = "result-display";
+    summitBtn.textContent = userName + " your score is " + score + " /5 ";
+    // summitBtn.append(resultEl);
+}
+localStorage.setItem("score", JSON.stringify(score));
 
 startBtn.onclick = startQuiz;
