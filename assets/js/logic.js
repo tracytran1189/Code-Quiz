@@ -68,7 +68,7 @@ function startQuiz() {
     timerInterval = setInterval(function() {
         time--;
         timerEl.textContent = ("Time left : " + time);
-        if (time <= 0 || numberOfQuestions == 0) {
+        if (time <= 0) {
             endQuiz();
         }
     }, 1000);
@@ -107,6 +107,9 @@ function showQuestion() {
         answersDiv.append(answerButton);
     }
     quizContainer.append(answersDiv);
+    // if (numberOfQuestions < quizQuestions.length) {
+    //     endQuiz();
+
 }
 
 //check answers
