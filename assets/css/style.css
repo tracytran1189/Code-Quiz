@@ -24,6 +24,8 @@ main {
     color: white;
     border-radius: 5px;
     padding: 10px;
+    max-width: 500px;
+    margin: auto;
 }
 
 #answers-id {
@@ -35,6 +37,7 @@ main {
     border-radius: 5px;
     padding: 10PX;
     margin: 5PX;
+    width: 100%;
 }
 
 #start {
@@ -51,9 +54,11 @@ main {
     border-color: #EABDA8;
 }
 
-#answer {
+#answers {
     font-size: 20px;
-    padding: 50px;
+    padding: 25px;
+    max-width: 400px;
+    margin: auto;
 }
 
 footer {

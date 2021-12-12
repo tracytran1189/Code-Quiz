@@ -4,6 +4,7 @@ var quizContainer = document.getElementById('quiz-container');
 var showAnswer = document.getElementById('answer');
 var resultsContainer = document.getElementById('results');
 var summitBtn = document.getElementById('get-your-score');
+
 //add questions
 var quizQuestions = [{
         question: "1. What does HTML stand for?",
@@ -54,7 +55,7 @@ var quizQuestions = [{
         correctAnswer: 'Prompt()'
     },
 ]
-var time = 50;
+var time = 10;
 var timerInterval;
 var gameIndex = -1;
 var numberOfQuestions = quizQuestions.length;
@@ -63,14 +64,27 @@ var score = 0;
 var userName = ""
 
 function startQuiz() {
+    time = 10;
+    score = 0;
+    currentQuestionIndex = 0;
+    userName = "";
+    var startAgain = document.getElementById('start-again');
+    if (startAgain) {
+        startAgain.remove();
+        summitBtn.textContent = "";
+    }
     startBtn.remove();
     console.log('startQuiz');
     timerEl.textContent = ("Time left : " + time);
     timerInterval = setInterval(function() {
         time--;
+        if (time < 0) {
+            time = 0;
+        }
         timerEl.textContent = ("Time left : " + time);
-        if (time <= 0 || currentQuestionIndex == quizQuestions.length) {
+        if (time <= 0) {
             endQuiz();
+            clearQuestion();
         }
     }, 1000);
 
@@ -142,6 +156,8 @@ function checkAnswer(event) {
 
     if (currentQuestionIndex < quizQuestions.length) {
         showQuestion();
+    } else {
+        endQuiz();
     }
 }
 
@@ -181,12 +197,13 @@ function getHighScore() {
 }
 
 function displayResult() {
-    // document.getElementById('form').remove();
-    // var resultEl = document.createElement('div');
-    // resultEl.id = "result-display";
     summitBtn.textContent = userName + " your score is " + score + " /5 ";
-    // summitBtn.append(resultEl);
+    var startAgain = document.createElement('button');
+    startAgain.id = "start-again";
+    startAgain.textContent = ("Try Again");
+    startAgain.onclick = startQuiz;
+
+    document.body.append(startAgain);
 }
-localStorage.setItem("score", JSON.stringify(score));
 
 startBtn.onclick = startQuiz;
