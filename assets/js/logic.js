@@ -103,6 +103,7 @@ function showQuestion() {
 
     for (button in quizQuestions[currentQuestionIndex].answers) {
         const answerButton = document.createElement('button');
+        answerButton.id = "answers-id";
         answerButton.textContent = quizQuestions[currentQuestionIndex].answers[button];
         answerButton.setAttribute('data-answer', quizQuestions[currentQuestionIndex].correctAnswer);
         answerButton.onclick = checkAnswer;
@@ -132,7 +133,7 @@ function checkAnswer(event) {
         showAnswer.textContent = ("Wrong Answer");
         gameIndex++;
     }
-    resultsContainer.textContent = ("Your Score = " + score + " /5 ");
+    // resultsContainer.textContent = ("Your Score = " + score + " /5 ");
 
 
     currentQuestionIndex++;
