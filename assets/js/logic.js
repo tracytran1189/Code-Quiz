@@ -1,7 +1,7 @@
 var startBtn = document.getElementById('start');
 var timerEl = document.getElementById('timer');
 var quizContainer = document.getElementById('quiz-container');
-var submitButton = document.getElementById('submit');
+var showAnswer = document.getElementById('answer');
 var resultsContainer = document.getElementById('results');
 //add questions
 var quizQuestions = [{
@@ -58,6 +58,8 @@ var timerInterval;
 var gameIndex = -1;
 var numberOfQuestions = quizQuestions.length;
 var currentQuestionIndex = 0;
+var score = 0;
+
 
 function startQuiz() {
     startBtn.remove();
@@ -66,7 +68,7 @@ function startQuiz() {
     timerInterval = setInterval(function() {
         time--;
         timerEl.textContent = ("Time left : " + time);
-        if (time <= 0) {
+        if (time <= 0 || numberOfQuestions == 0) {
             endQuiz();
         }
     }, 1000);
@@ -87,15 +89,15 @@ function clearQuestion() {
 
 function showQuestion() {
 
-    var question = document.createElement('div');
-    question.id = "question";
-    question.textContent = quizQuestions[currentQuestionIndex].question;
-    quizContainer.append(question);
+    var questionDiv = document.createElement('div');
+    questionDiv.id = "question";
+    questionDiv.textContent = quizQuestions[currentQuestionIndex].question;
+    quizContainer.append(questionDiv);
 
     var answersDiv = document.createElement('div');
     answersDiv.id = "answers";
 
-    // var answers =[];
+
     for (button in quizQuestions[currentQuestionIndex].answers) {
         const answerButton = document.createElement('button');
         answerButton.textContent = quizQuestions[currentQuestionIndex].answers[button];
@@ -114,14 +116,20 @@ function checkAnswer(event) {
     var selectedAnswer = event.target.textContent;
     if (correctAnswer === selectedAnswer) {
         console.log('correct');
+        score++;
+        showAnswer.textContent = ("You got it right!");
 
     } else {
         time -= 10;
         console.log('false');
+        showAnswer.textContent = ("Wrong Answer");
+        gameIndex++;
     }
-    gameIndex++;
+    resultsContainer.textContent = ("Your Score = " + score + " /5 ");
+    localStorage.setItem("score", JSON.stringify(score));
     currentQuestionIndex++;
     clearQuestion();
+
     showQuestion();
 }
 
@@ -129,6 +137,6 @@ function generateQuiz() {
     console.log('generateQuiz')
 
     showQuestion();
-
 }
+
 startBtn.onclick = startQuiz;
