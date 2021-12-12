@@ -139,9 +139,9 @@ function checkAnswer(event) {
 
     clearQuestion();
 
-    showQuestion();
-
-
+    if (currentQuestionIndex < quizQuestions.length) {
+        showQuestion();
+    }
 }
 
 
