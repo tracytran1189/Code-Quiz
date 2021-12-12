@@ -62,6 +62,7 @@ var currentQuestionIndex;
 var score;
 var userName;
 
+//Set Timer when start quiz
 function startQuiz() {
     time = 50;
     score = 0;
@@ -97,12 +98,13 @@ function endQuiz() {
     getHighScore();
 }
 
-
+//clear question when time is zero
 function clearQuestion() {
     document.getElementById("question").remove();
     document.getElementById("answers").remove();
 }
 
+//Show questions function
 function showQuestion() {
 
     var questionDiv = document.createElement('div');
@@ -128,7 +130,7 @@ function showQuestion() {
 
 }
 
-//check answers
+//check answers and deduct time if wrong answer
 function checkAnswer(event) {
     event.preventDefault();
     console.log('checkAnswer', event);
@@ -146,9 +148,8 @@ function checkAnswer(event) {
         showAnswer.textContent = ("Wrong Answer");
 
     }
-    // resultsContainer.textContent = ("Your Score = " + score + " /5 ");
 
-
+    //Show next question after give answer
     currentQuestionIndex++;
 
     clearQuestion();
@@ -168,6 +169,7 @@ function generateQuiz() {
     showQuestion();
 }
 
+//Showing result after quiz end
 function getHighScore() {
     console.log("high score");
     resultsContainer.remove();
@@ -194,9 +196,9 @@ function getHighScore() {
     summitBtn.append(form);
 
 }
-
+//display name and score and try again button
 function displayResult() {
-    summitBtn.textContent = userName + " your score is " + score + " /5 ";
+    summitBtn.textContent = userName + ", your score is " + score + " /5 ";
     var startAgain = document.createElement('button');
     startAgain.id = "start-again";
     startAgain.textContent = ("Try Again");
