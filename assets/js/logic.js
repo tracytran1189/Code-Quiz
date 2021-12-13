@@ -74,7 +74,6 @@ function startQuiz() {
         summitBtn.textContent = "";
     }
     startBtn.remove();
-    console.log('startQuiz');
     timerEl.textContent = ("Time left : " + time);
     timerInterval = setInterval(function() {
         time--;
@@ -133,18 +132,18 @@ function showQuestion() {
 //check answers and deduct time if wrong answer
 function checkAnswer(event) {
     event.preventDefault();
-    console.log('checkAnswer', event);
+
     var correctAnswer = event.target.getAttribute("data-answer");
     var selectedAnswer = event.target.textContent;
     if (correctAnswer === selectedAnswer) {
-        console.log('correct');
+
         score++;
         showAnswer.textContent = ("You got it right!");
 
 
     } else {
         time -= 10;
-        console.log('false');
+
         showAnswer.textContent = ("Wrong Answer");
 
     }
@@ -164,14 +163,14 @@ function checkAnswer(event) {
 
 
 function generateQuiz() {
-    console.log('generateQuiz')
+
 
     showQuestion();
 }
 
 //Showing result after quiz end
 function getHighScore() {
-    console.log("high score");
+
     resultsContainer.remove();
     showAnswer.remove();
     summitBtn.textContent = ("All Done ! Enter your name:");
@@ -185,8 +184,8 @@ function getHighScore() {
 
     form.onsubmit = function(e) {
         e.preventDefault();
-        console.log('submit', initial.value);
         userName = initial.value;
+
 
         displayResult();
     }
