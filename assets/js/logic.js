@@ -172,7 +172,7 @@ function generateQuiz() {
 function getHighScore() {
 
     resultsContainer.remove();
-    showAnswer.remove();
+    showAnswer.textContent = "";
     summitBtn.textContent = ("All Done ! Enter your name:");
     var form = document.createElement('form');
     form.id = "form";

@@ -50,8 +50,8 @@ main {
 }
 
 #get-your-score {
-    border: 2px;
-    border-color: #EABDA8;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 #answers {
@@ -61,6 +61,6 @@ main {
     margin: auto;
 }
 
-footer {
-    padding-top: 20px;
+#form {
+    padding: 20px;
 }
