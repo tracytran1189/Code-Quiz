@@ -186,13 +186,21 @@ function getHighScore() {
         e.preventDefault();
         userName = initial.value;
 
-
         displayResult();
+
     }
 
     form.append(initial);
+    var submitName = document.createElement('button');
+    submitName.id = "submit-name";
+    submitName.textContent = ("Submit Name");
+    submitName.type = 'submit';
+
+    form.append(submitName);
 
     summitBtn.append(form);
+
+
 
 }
 //display name and score and try again button
